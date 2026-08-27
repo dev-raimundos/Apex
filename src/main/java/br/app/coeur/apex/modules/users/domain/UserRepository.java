@@ -3,10 +3,9 @@ package br.app.coeur.apex.modules.users.domain;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository {
-    User save(User user);
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    Optional<User> findById(UUID id);
+public interface UserRepository extends JpaRepository<User, UUID> {
 
     Optional<User> findByEmail(String email);
 }

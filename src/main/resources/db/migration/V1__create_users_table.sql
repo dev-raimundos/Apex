@@ -1,11 +1,16 @@
-CREATE TABLE users (
+CREATE SCHEMA IF NOT EXISTS users;
+CREATE SCHEMA IF NOT EXISTS auth;
+
+CREATE TABLE users.users (
     id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    active BOOLEAN NOT NULL DEFAULT TRUE,
-    email_verified BOOLEAN NOT NULL DEFAULT FALSE,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
-    last_login_at TIMESTAMP
+    name VARCHAR(200) NOT NULL,
+    email VARCHAR(320) NOT NULL,
+    password_hash TEXT NOT NULL,
+    active BOOLEAN NOT NULL,
+    email_verified BOOLEAN NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL,
+    last_login_at TIMESTAMPTZ
 );
+
+CREATE UNIQUE INDEX ix_users_email ON users.users (email);

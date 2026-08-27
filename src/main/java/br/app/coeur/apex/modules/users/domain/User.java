@@ -3,18 +3,43 @@ package br.app.coeur.apex.modules.users.domain;
 import java.time.Instant;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users", schema = "users")
 public class User {
+
+    @Id
     private UUID id;
+
+    @Column(nullable = false, length = 200)
     private String name;
+
+    @Column(nullable = false, unique = true, length = 320)
     private String email;
+
+    @Column(name = "password_hash", nullable = false, columnDefinition = "text")
     private String passwordHash;
+
+    @Column(nullable = false)
     private boolean active;
+
+    @Column(name = "email_verified", nullable = false)
     private boolean emailVerified;
+
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt;
+
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
+
+    @Column(name = "last_login_at")
     private Instant lastLoginAt;
 
-    private User() {
+    protected User() {
     }
 
     public static User create(String name, String email, String passwordHash) {
@@ -26,45 +51,40 @@ public class User {
         user.active = true;
         user.emailVerified = false;
         user.createdAt = Instant.now();
-        user.updatedAt = Instant.now();
+        user.updatedAt = user.createdAt;
         return user;
     }
 
-    public static User restore(
-            UUID id,
-            String name,
-            String email,
-            String passwordHash,
-            boolean active,
-            boolean emailVerified,
-            Instant createdAt,
-            Instant updatedAt,
-            Instant lastLoginAt) {
-        User user = new User();
-        user.id = id;
-        user.name = name;
-        user.email = email;
-        user.passwordHash = passwordHash;
-        user.active = active;
-        user.emailVerified = emailVerified;
-        user.createdAt = createdAt;
-        user.updatedAt = updatedAt;
-        user.lastLoginAt = lastLoginAt;
-        return user;
+    public void rename(String newName) {
+        this.name = requireValid(newName);
+        this.updatedAt = Instant.now();
     }
 
-    public void changeEmail(String newEmail) {
-        this.email = requireValid(newEmail);
-        this.emailVerified = false;
+    public void changePassword(String newPasswordHash) {
+        this.passwordHash = requireValid(newPasswordHash);
         this.updatedAt = Instant.now();
     }
 
     public void verifyEmail() {
+        if (emailVerified) {
+            return;
+        }
         this.emailVerified = true;
         this.updatedAt = Instant.now();
     }
 
+    public void activate() {
+        if (active) {
+            return;
+        }
+        this.active = true;
+        this.updatedAt = Instant.now();
+    }
+
     public void deactivate() {
+        if (!active) {
+            return;
+        }
         this.active = false;
         this.updatedAt = Instant.now();
     }
