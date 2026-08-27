@@ -1,0 +1,15 @@
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.idea
+**/.project
+**/.settings
+**/.vscode
+**/compose*
+**/Dockerfile*
+**/target
+HELP.md
+README.md
+!**/.gitignore

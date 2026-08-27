@@ -1,0 +1,30 @@
+services:
+  api:
+    image: apex
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: ${DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      JWT_ISSUER: ${JWT_ISSUER:-Apex}
+      JWT_AUDIENCE: ${JWT_AUDIENCE:-Apex.Clients}
+      JWT_EXPIRATION_MINUTES: ${JWT_EXPIRATION_MINUTES:-15}
+      JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
+    expose:
+      - "8080"
+    networks:
+      home-network:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+networks:
+  home-network:
+    name: home-network
+    external: true
