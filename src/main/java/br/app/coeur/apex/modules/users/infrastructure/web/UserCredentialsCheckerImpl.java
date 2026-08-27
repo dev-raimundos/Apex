@@ -23,7 +23,7 @@ public class UserCredentialsCheckerImpl implements UserCredentialsChecker {
     @Override
     public Optional<AuthenticatedUser> validate(String email, String password) {
         return userRepository.findByEmail(email)
-                .filter(User::isActive)
+                .filter(user -> user.isActive())
                 .filter(user -> passwordEncoder.matches(password, user.getPasswordHash()))
                 .map(this::registerLoginAndMap);
     }

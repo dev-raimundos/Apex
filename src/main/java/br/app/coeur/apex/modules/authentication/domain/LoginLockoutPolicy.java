@@ -16,7 +16,7 @@ public final class LoginLockoutPolicy {
     public static boolean isLockedOut(List<LoginAttempt> recentAttempts, Instant now) {
         List<LoginAttempt> failures = recentAttempts.stream()
                 .filter(attempt -> !attempt.isSucceeded())
-                .sorted(Comparator.comparing(LoginAttempt::getAttemptedAt).reversed())
+                .sorted(Comparator.comparing((LoginAttempt attempt) -> attempt.getAttemptedAt()).reversed())
                 .toList();
 
         if (failures.size() < MAX_FAILED_ATTEMPTS) {

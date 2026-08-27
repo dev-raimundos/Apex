@@ -30,7 +30,7 @@ public class RefreshTokenUseCase {
     public RefreshTokenOutput execute(RefreshTokenInput input) {
         String tokenHash = refreshTokenGenerator.hash(input.refreshToken());
         RefreshToken current = refreshTokenRepository.findByTokenHash(tokenHash)
-                .filter(RefreshToken::isActive)
+                .filter(token -> token.isActive())
                 .orElseThrow(() -> new AppUnauthorizedException("Refresh token inválido ou expirado."));
 
         current.revoke();
