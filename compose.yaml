@@ -15,16 +15,9 @@ services:
       JWT_SIGNING_KEY: ${JWT_SIGNING_KEY}
     expose:
       - "8080"
-    networks:
-      home-network:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
       timeout: 5s
       start_period: 15s
       retries: 3
-
-networks:
-  home-network:
-    name: home-network
-    external: true

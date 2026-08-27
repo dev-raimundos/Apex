@@ -1,6 +1,5 @@
 services:
   api:
-    networks: !reset null
     environment:
       SPRING_DATASOURCE_URL: ${DB_URL}
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
