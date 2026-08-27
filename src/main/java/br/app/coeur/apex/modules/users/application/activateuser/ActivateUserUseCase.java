@@ -2,10 +2,11 @@ package br.app.coeur.apex.modules.users.application.activateuser;
 
 import java.util.UUID;
 
-import br.app.coeur.apex.modules.users.domain.User;
-import br.app.coeur.apex.modules.users.domain.UserRepository;
-import br.app.coeur.apex.shared.exceptions.AppNotFoundException;
 import org.springframework.stereotype.Service;
+
+import br.app.coeur.apex.modules.users.domain.User;
+import br.app.coeur.apex.modules.users.infrastructure.repository.UserRepository;
+import br.app.coeur.apex.shared.exception.AppNotFoundException;
 
 @Service
 public class ActivateUserUseCase {

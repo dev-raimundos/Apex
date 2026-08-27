@@ -1,6 +1,9 @@
 package br.app.coeur.apex.modules.users.application.changepassword;
 
-import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
 
-public record ChangePasswordInput(UUID id, String currentPassword, String newPassword) {
+public record ChangePasswordInput(
+        @NotBlank(message = "Senha atual é obrigatória") String currentPassword,
+        @NotBlank(message = "Nova senha é obrigatória") String newPassword
+) {
 }

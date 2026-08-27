@@ -1,5 +1,6 @@
 package br.app.coeur.apex.modules.authentication.domain;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public class RefreshToken {
     protected RefreshToken() {
     }
 
-    public static RefreshToken create(UUID userId, String email, String tokenHash, java.time.Duration lifetime) {
+    public static RefreshToken create(UUID userId, String email, String tokenHash, Duration lifetime) {
         RefreshToken token = new RefreshToken();
         token.id = UUID.randomUUID();
         token.userId = userId;

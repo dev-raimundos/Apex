@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
-import br.app.coeur.apex.shared.contracts.AuthenticatedUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,13 +31,13 @@ public class JwtTokenGenerator {
         this.expirationMinutes = expirationMinutes;
     }
 
-    public GeneratedToken generate(AuthenticatedUser user) {
+    public GeneratedToken generate(UUID userId, String email) {
         Instant now = Instant.now();
         Instant expiresAt = now.plusSeconds(expirationMinutes * 60);
 
         String accessToken = Jwts.builder()
-                .subject(user.id().toString())
-                .claim("email", user.email())
+                .subject(userId.toString())
+                .claim("email", email)
                 .id(UUID.randomUUID().toString())
                 .issuer(issuer)
                 .audience().add(audience).and()

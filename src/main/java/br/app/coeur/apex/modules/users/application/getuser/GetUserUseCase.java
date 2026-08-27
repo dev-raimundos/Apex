@@ -1,4 +1,4 @@
-package br.app.coeur.apex.modules.users.application.renameuser;
+package br.app.coeur.apex.modules.users.application.getuser;
 
 import java.util.UUID;
 
@@ -9,21 +9,26 @@ import br.app.coeur.apex.modules.users.infrastructure.repository.UserRepository;
 import br.app.coeur.apex.shared.exception.AppNotFoundException;
 
 @Service
-public class RenameUserUseCase {
+public class GetUserUseCase {
 
     private final UserRepository userRepository;
 
-    public RenameUserUseCase(UserRepository userRepository) {
+    public GetUserUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public RenameUserOutput execute(UUID id, RenameUserInput input) {
+    public GetUserOutput execute(UUID id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new AppNotFoundException("Usuário não encontrado: " + id));
 
-        user.rename(input.newName());
-        User saved = userRepository.save(user);
-
-        return new RenameUserOutput(saved.getId(), saved.getName());
+        return new GetUserOutput(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.isActive(),
+                user.isEmailVerified(),
+                user.getCreatedAt(),
+                user.getUpdatedAt(),
+                user.getLastLoginAt());
     }
 }

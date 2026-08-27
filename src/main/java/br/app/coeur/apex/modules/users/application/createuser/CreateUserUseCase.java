@@ -1,10 +1,11 @@
 package br.app.coeur.apex.modules.users.application.createuser;
 
-import br.app.coeur.apex.modules.users.domain.User;
-import br.app.coeur.apex.modules.users.domain.UserRepository;
-import br.app.coeur.apex.shared.exceptions.AppConflictException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import br.app.coeur.apex.modules.users.domain.User;
+import br.app.coeur.apex.modules.users.infrastructure.repository.UserRepository;
+import br.app.coeur.apex.shared.exception.AppConflictException;
 
 @Service
 public class CreateUserUseCase {

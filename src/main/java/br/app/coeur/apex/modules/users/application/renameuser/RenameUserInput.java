@@ -1,6 +1,6 @@
 package br.app.coeur.apex.modules.users.application.renameuser;
 
-import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
 
-public record RenameUserInput(UUID id, String newName) {
+public record RenameUserInput(@NotBlank(message = "Nome é obrigatório") String newName) {
 }

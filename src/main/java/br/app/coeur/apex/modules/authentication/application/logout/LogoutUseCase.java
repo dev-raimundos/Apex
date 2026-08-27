@@ -1,8 +1,9 @@
 package br.app.coeur.apex.modules.authentication.application.logout;
 
-import br.app.coeur.apex.modules.authentication.domain.RefreshTokenRepository;
-import br.app.coeur.apex.modules.authentication.infrastructure.security.RefreshTokenGenerator;
 import org.springframework.stereotype.Service;
+
+import br.app.coeur.apex.modules.authentication.infrastructure.repository.RefreshTokenRepository;
+import br.app.coeur.apex.modules.authentication.infrastructure.security.RefreshTokenGenerator;
 
 @Service
 public class LogoutUseCase {
