@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import br.app.coeur.apex.modules.authentication.domain.service.LoginLockoutPolicy;
+
 class LoginLockoutPolicyTest {
 
     private static final String EMAIL = "ana@example.com";

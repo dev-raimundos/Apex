@@ -9,8 +9,8 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import br.app.coeur.apex.modules.authentication.domain.LoginAttempt;
-import br.app.coeur.apex.modules.authentication.domain.LoginLockoutPolicy;
 import br.app.coeur.apex.modules.authentication.domain.RefreshToken;
+import br.app.coeur.apex.modules.authentication.domain.service.LoginLockoutPolicy;
 import br.app.coeur.apex.modules.authentication.infrastructure.repository.LoginAttemptRepository;
 import br.app.coeur.apex.modules.authentication.infrastructure.repository.RefreshTokenRepository;
 import br.app.coeur.apex.modules.authentication.infrastructure.security.JwtTokenGenerator;

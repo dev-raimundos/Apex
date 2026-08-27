@@ -18,8 +18,9 @@ public class ActivateUserUseCase {
     }
 
     public ActivateUserOutput execute(UUID id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new AppNotFoundException("Usuário não encontrado: " + id));
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new AppNotFoundException("Usuário não encontrado: " + id)
+        );
 
         user.activate();
         User saved = userRepository.save(user);
